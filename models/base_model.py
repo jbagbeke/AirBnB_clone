@@ -1,0 +1,70 @@
+#!/usr/bin/python3
+"""
+The base module for other classes
+It defines all common attributes/methods for other classes
+"""
+import uuid
+from datetime import datetime
+
+class BaseModel:
+    """
+    Defines attrubutes and models that will be common to other classes
+    and will be inherited by other classes
+    """
+
+    def __init__(self, *args, **kwargs):
+        """
+        Instantiates common attributes
+
+        Args:
+            Arg1: (args) allows variable number of non-keyworded args to be passed
+            Arg2: (kwargs) allows variable number of keyworded args to be passed
+        """
+
+        if kwargs is not None and len(kwargs) > 0:
+            for key, value in kwargs.items():
+                if key == "__class__":
+                    continue
+                elif key == "created_at" or key == "updated_at":
+                    key_val = datetime.fromisoformat(value)
+                    setattr(self, key, key_val)
+                else:
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
+
+    def __str__(self):
+        """
+        Returns string representation of desired output
+        """
+
+        return ("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
+
+    def save(self):
+        """
+        Updates the public instance attribute updated_at with the current datetime
+
+        Args: None
+
+        Return: None
+        """
+
+        self.updated_at = datetime.now()
+
+    def to_dict(self):
+        """
+        Returns a dictionary containing all keys/values of __dict__ of the instance
+
+        Args: None
+
+        Return: Dict containing key/values of the instance
+        """
+
+        self.__dict__['__class__'] = self.__class__.__name__
+
+        self.created_at = self.created_at.isoformat()
+        self.updated_at = self.updated_at.isoformat()
+
+        return self.__dict__
