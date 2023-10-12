@@ -1,0 +1,28 @@
+#!/usr/bin/python3
+""" Test file review """
+import unittest
+from models.review import Review
+
+
+class TestUser(unittest.TestCase):
+    """ Test for Review Class """
+
+    def setUp(self):
+        """ The setUp function """
+        self.review = Review()
+
+    def tearDown(self):
+        pass
+
+    def test___init__(self):
+        """ Test for __init__ function """
+        self.assertTrue(hasattr(self.review, "place_id"))
+        self.assertTrue(hasattr(self.review, "user_id"))
+        self.assertTrue(hasattr(self.review, "text"))
+        self.assertEquals(type(self.review.place_id), str)
+        self.assertEquals(type(self.review.user_id), str)
+        self.assertEquals(type(self.review.review), str)
+
+
+if __name__ == "__main__":
+    unittest.main()

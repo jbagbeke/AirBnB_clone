@@ -1,0 +1,12 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    color: #484848;
+    size: 14px;
+    font: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    #icon { "trial.ico"; }
+}
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+}

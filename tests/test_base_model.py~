@@ -1,0 +1,17 @@
+#!/usr/bin/python3
+""" Test file for base_model """
+import unittest
+__import__("models.base_model").BaseModel
+
+
+class TestBaseModel(unittest.TestCase):
+    """ Test for BaseModel Class """
+
+    def Test_uuid(self):
+        """ Test for uuid creation """
+        model1 = BaseModel()
+        model2 = BaseModel()
+        self.assertNotEqual(model1.id, model2.id)
+        self.assertIsInstance(model1, BaseModel)
+        self.assertIsInstance(model1.id, str)
+        self.assertTrue(hasattr(model1, "id"))
