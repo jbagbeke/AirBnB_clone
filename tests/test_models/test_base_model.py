@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Test file for base_model """
 import unittest
+import datetime
 from models.base_model import BaseModel
 
 
@@ -12,15 +13,15 @@ class TestBaseModel(unittest.TestCase):
         self.model1 = BaseModel()
 
     def tearDown(self):
-        pass
+        self.model1.dispose()
 
     def test_save(self):
         """ Test for save function """
-        self.assertIsInstance(self.model1.updated_at, datetime)
+        self.assertEqual(type(self.model1.updated_at), datetime)
 
     def test_to_dict(self):
         """ The to_dict test """
-        self.assertEquals(type(self.model1.to_dict()), dict)
+        self.assertEqual(type(self.model1.to_dict()), dict)
 
 
 if __name__ == "__main__":
