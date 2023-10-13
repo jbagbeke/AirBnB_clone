@@ -1,0 +1,74 @@
+#!/usr/bin/python3
+"""
+Contains the entry point of the command interpreter
+"""
+import cmd
+import sys
+from models.base_model import BaseModel
+from models import storage
+
+
+class HBNBCommand(cmd.Cmd):
+    """
+    A subclass for text based interaction
+    Inherits from cmd.Cmd
+    """
+
+    prompt = "(hbnb) "
+
+    def do_quit(self, line):
+        """Quit command to exit the program
+
+        """
+        return True
+
+    def do_EOF(self, line):
+        """
+        Command to handle EOF (Ctrl+D or Ctrl+Z) by exiting the console/program
+        """
+        print("")
+        return True
+
+    def emptyline(self):
+        """
+        Executes no command when no input is entered
+        """
+        pass
+
+    def _CheckClass(self, line):
+        """ Checks if a class exists """
+        classes = [
+                "BaseModel", "User", "State", "City",
+                "Amenity", "Place", "Review"
+                ]
+
+        if line not in classes:
+            return False
+        else:
+            return True
+
+    def do_show(self, line):
+        """ Prints the string representation of an instance based on the class name and id"""
+        lines = line.split()
+
+        if len(lines) == 0:
+            print("** class name missing **")
+        else:
+            if self._CheckClass(lines[0]):
+                if len(lines) == 1:
+                    print("** instance id missing **")
+                else:
+                    loaded_obj = storage.all()
+                    name_and_id = str(lines[0]) + "." + str(lines[1])
+                    
+                    if name_and_id not in loaded_obj.keys():
+                        print("** no instance found **")
+                    else:
+                        print(loaded_obj[name_and_id])
+            else:
+                print("** class doesn't exist **")
+
+
+
+if __name__ == '__main__':
+    HBNBCommand().cmdloop()
