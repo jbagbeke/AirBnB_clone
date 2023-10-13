@@ -61,19 +61,21 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         """ this is the show command """
         args = arg.split()
-        print(args[0])
-        if args[0] != "":
-            if args[0] == "BaseModel":
-                new_class = BaseModel()
-                if args[1] != "":
-                    if args[1] == new_class.id:
-                        print(new_class.__repr__)
+        if len(args) != 0:
+            if args[0] != "":
+                if args[0] == "BaseModel":
+                    new_class = BaseModel()
+                    if args[1] != "":
+                        if args[1] == new_class.id:
+                            print(new_class.__repr__)
+                        else:
+                            print("** no instance found **")
                     else:
-                        print("** no instance found **")
+                        print("** instance id missing **")
                 else:
-                    print("** instance id missing **")
+                    print("** class doesn't exist **")
             else:
-                print("** class doesn't exist **")
+                print("** class name missing **")
         else:
             print("** class name missing **")
 
