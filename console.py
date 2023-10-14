@@ -68,6 +68,7 @@ class HBNBCommand(cmd.Cmd):
                 "Amenity", "Place", "Review"
                 ]
 
+<<<<<<< HEAD
         if line not in classes:
             return False
         else:
@@ -99,6 +100,27 @@ class HBNBCommand(cmd.Cmd):
         lines = line.split()
 
         if len(lines) == 0:
+=======
+    def do_show(self, arg):
+        """ this is the show command """
+        args = arg.split()
+        if len(args) != 0:
+            if args[0] != "":
+                if args[0] == "BaseModel":
+                    new_class = BaseModel()
+                    if args[1] != "":
+                        if args[1] == new_class.id:
+                            print(new_class.__repr__)
+                        else:
+                            print("** no instance found **")
+                    else:
+                        print("** instance id missing **")
+                else:
+                    print("** class doesn't exist **")
+            else:
+                print("** class name missing **")
+        else:
+>>>>>>> dc8dd8766c7333a3997133548d69d7e6e7dd258f
             print("** class name missing **")
         else:
             if self._CheckClass(lines[0]):
