@@ -8,6 +8,7 @@ from models import storage
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
+
 class HBNBCommand(cmd.Cmd):
     """
     A subclass for text based interaction
@@ -42,13 +43,13 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_EOF(self, arg):
-        """ Command to handle EOF (Ctrl+D or Ctrl+Z) by exiting the console/program"""
+        """Handles EOF (Ctrl+D or Ctrl+Z) by exiting the console"""
         sys.exit(1)
 
     def do_quit(self, line):
         """ Quit command to exit the program """
         sys.exit(1)
-    
+
     def do_create(self, arg):
         """ this is the create command """
         if arg != "":
@@ -73,8 +74,8 @@ class HBNBCommand(cmd.Cmd):
         else:
             return True
 
-   def do_show(self, line):
-        """ Prints the string representation of an instance based on the class name and id"""
+    def do_show(self, line):
+        """Prints str representation of instance based on class name and id"""
         lines = line.split()
 
         if len(lines) == 0:
@@ -95,7 +96,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_destroy(self, line):
-        """ Prints the string representation of an instance based on the class name and id"""
+        """Prints str representation of instance based on class name and id"""
         lines = line.split()
 
         if len(lines) == 0:
