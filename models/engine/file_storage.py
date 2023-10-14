@@ -70,6 +70,7 @@ class FileStorage:
         """
 
         saved_dict = {}
+
         for key, value in FileStorage.__objects.items():
             saved_dict[key] = value.to_dict()
 

@@ -3,4 +3,9 @@
 Test Code to Pass PycodeStyle
 """
 
-print("ALX IS THE BEST")
+def print_it(line):
+    """
+    Prints ALX IS THE BEST
+    """
+
+    print("ALX IS THE BEST")

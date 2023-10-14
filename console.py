@@ -114,7 +114,7 @@ class HBNBCommand(cmd.Cmd):
                         print("** no instance found **")
                     else:
                         del loaded_obj[name_and_id]
-                        FileStorage.__objects = loaded_obj
+                        storage.__objects = loaded_obj
                         storage.save()
             else:
                 print("** class doesn't exist **")
