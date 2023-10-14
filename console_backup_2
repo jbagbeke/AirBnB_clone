@@ -91,61 +91,28 @@ class HBNBCommand(cmd.Cmd):
                     if name_and_id not in loaded_obj.keys():
                         print("** no instance found **")
                     else:
-                        #print(loaded_obj[name_and_id])
                         function(loaded_obj, name_and_id)
             else:
                 print("** class doesn't exist **")
 
     def do_show(self, line):
         """Prints str representation of instance based on class name and id"""
-	    
+
         def show_it(loaded_obj, name_and_id):
-		    #""" defines final command in show method """
+            """ Defines final command in show method """
             print(loaded_obj[name_and_id])
 
-
         self._ExecuteCommand(line, show_it)
-        """lines = line.split()
-
-        if len(lines) == 0:
-            print("** class name missing **")
-        else:
-            if self._CheckClass(lines[0]):
-                if len(lines) == 1:
-                    print("** instance id missing **")
-                else:
-                    loaded_obj = storage.all()
-                    name_and_id = str(lines[0]) + "." + str(lines[1])
-
-                    if name_and_id not in loaded_obj.keys():
-                        print("** no instance found **")
-                    else:
-                        print(loaded_obj[name_and_id])
-            else:
-                print("** class doesn't exist **")"""
-	    #self._ExecuteCommand(line, show_it)
 
     def do_destroy(self, line):
         """Prints str representation of instance based on class name and id"""
-        lines = line.split()
 
-        if len(lines) == 0:
-            print("** class name missing **")
-        else:
-            if self._CheckClass(lines[0]):
-                if len(lines) == 1:
-                    print("** instance id missing **")
-                else:
-                    loaded_obj = storage.all()
-                    name_and_id = str(lines[0]) + "." + str(lines[1])
+        def destroy_it(loaded_obj, name_and_id):
+            """ Defines final command for destroy method """
+            del loaded_obj[name_and_id]
+            storage.save()
 
-                    if name_and_id not in loaded_obj.keys():
-                        print("** no instance found **")
-                    else:
-                        del loaded_obj[name_and_id]
-                        storage.save()
-            else:
-                print("** class doesn't exist **")
+        self._ExecuteCommand(line, destroy_it)
 
     def do_all(self, line):
         """
@@ -153,6 +120,7 @@ class HBNBCommand(cmd.Cmd):
         """
         lines = line.split()
         loaded_obj = storage.all()
+
         obj_list = []
 
         if len(lines) == 0:
@@ -170,27 +138,25 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_update(self, line):
-        """ Updates instance based on class name and id by adding/updating attribute"""
+        """
+        Updates instance using class name and id by adding/updating attribute
+        """
         lines = line.split()
 
-        if len(lines) == 0:
-            print("** class name missing **")
-        else:
-            if self._CheckClass(lines[0]):
-                if len(lines) == 1:
-                    print("** instance id missing **")
-                else:
-                    loaded_obj = storage.all()
-                    name_and_id = str(lines[0]) + "." + str(lines[1])
+        def update_it(loaded_obj, name_and_id):
+            """ Defines final command for the update method """
 
-                    if name_and_id not in loaded_obj.keys():
-                        print("** no instance found **")
-                    else:
-                        print(loaded_obj[name_and_id])
+            if len(lines) < 3:
+                print("** attribute name missing **")
+            elif len(lines) < 4:
+                print("** value missing **")
             else:
-                print("** class doesn't exist **")
+                obj = loaded_obj[name_and_id]
+                val_typecast = type(getattr(obj, lines[2]))(lines[3])
+                setattr(obj, lines[2], val_typecast)
+                storage.save()
 
-
+        self._ExecuteCommand(line, update_it)
 
 
 if __name__ == '__main__':
