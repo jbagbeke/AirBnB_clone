@@ -66,9 +66,10 @@ class BaseModel:
         Return: Dict containing key/values of the instance
         """
 
-        self.__dict__['__class__'] = self.__class__.__name__
+        dict_copy = self.__dict__.copy()
+        dict_copy['__class__'] = self.__class__.__name__
 
-        self.created_at = self.created_at.isoformat()
-        self.updated_at = self.updated_at.isoformat()
+        dict_copy["created_at"] = self.created_at.isoformat()
+        dict_copy["updated_at"] = self.updated_at.isoformat()
 
-        return self.__dict__
+        return dict_copy

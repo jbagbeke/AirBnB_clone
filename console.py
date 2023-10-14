@@ -106,7 +106,6 @@ class HBNBCommand(cmd.Cmd):
                 if len(lines) == 1:
                     print("** instance id missing **")
                 else:
-                    storage.reload()
                     loaded_obj = storage.all()
                     name_and_id = str(lines[0]) + "." + str(lines[1])
 
@@ -114,7 +113,6 @@ class HBNBCommand(cmd.Cmd):
                         print("** no instance found **")
                     else:
                         del loaded_obj[name_and_id]
-                        storage.__objects = loaded_obj
                         storage.save()
             else:
                 print("** class doesn't exist **")
