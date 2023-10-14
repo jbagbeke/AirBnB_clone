@@ -52,11 +52,14 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         """ this is the create command """
-        if line != "":
-            if line == "BaseModel":
-                new_class = BaseModel()
+        lines = line.split()
+
+        if len(lines) > 0:
+            if self._CheckClass(lines[0]):
+                new_class = storage.get_class(lines[0])
+                new_instance = new_class()
                 storage.save()
-                print(new_class.id)
+                print(new_instance.id)
             else:
                 print("** class doesn't exist **")
         else:
