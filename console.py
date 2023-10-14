@@ -42,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
         """ Executes no command when no input is entered """
         pass
 
-    def do_EOF(self, arg):
+    def do_EOF(self, line):
         """Handles EOF (Ctrl+D or Ctrl+Z) by exiting the console"""
         sys.exit(1)
 
@@ -50,10 +50,10 @@ class HBNBCommand(cmd.Cmd):
         """ Quit command to exit the program """
         sys.exit(1)
 
-    def do_create(self, arg):
+    def do_create(self, line):
         """ this is the create command """
-        if arg != "":
-            if arg == "BaseModel":
+        if line != "":
+            if line == "BaseModel":
                 new_class = BaseModel()
                 storage.save()
                 print(new_class.id)
