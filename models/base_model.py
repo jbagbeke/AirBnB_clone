@@ -7,6 +7,7 @@ from models import storage
 import uuid
 from datetime import datetime
 
+
 class BaseModel:
     """
     Defines attrubutes and models that will be common to other classes
@@ -18,8 +19,8 @@ class BaseModel:
         Instantiates common attributes
 
         Args:
-            Arg1: (args) allows variable number of non-keyworded args to be passed
-            Arg2: (kwargs) allows variable number of keyworded args to be passed
+            Arg1: (args) allows variable # of non-keyworded args to be passed
+            Arg2: (kwargs) allows variable # of keyworded args to be passed
         """
 
         if kwargs is not None and len(kwargs) > 0:
@@ -37,17 +38,16 @@ class BaseModel:
             self.updated_at = self.created_at
             storage.new(self)
 
-
     def __str__(self):
         """
         Returns string representation of desired output
         """
-
-        return ("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
+        class_name = self.__class__.__name__
+        return ("[{}] ({}) {}".format(class_name, self.id, self.__dict__))
 
     def save(self):
         """
-        Updates the public instance attribute updated_at with the current datetime
+        Updates public instance attribute updated_at with current datetime
 
         Args: None
 
@@ -59,7 +59,7 @@ class BaseModel:
 
     def to_dict(self):
         """
-        Returns a dictionary containing all keys/values of __dict__ of the instance
+        Returns a dictionary representation of the instance
 
         Args: None
 

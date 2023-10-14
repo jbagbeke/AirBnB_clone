@@ -102,7 +102,6 @@ class HBNBCommand(cmd.Cmd):
             """ Defines final command in show method """
             print(loaded_obj[name_and_id])
 
-
         self._ExecuteCommand(line, show_it)
 
     def do_destroy(self, line):
@@ -112,7 +111,6 @@ class HBNBCommand(cmd.Cmd):
             """ Defines final command for destroy method """
             del loaded_obj[name_and_id]
             storage.save()
-
 
         self._ExecuteCommand(line, destroy_it)
 
@@ -140,7 +138,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_update(self, line):
-        """ Updates instance based on class name and id by adding/updating attribute"""
+        """
+        Updates instance using class name and id by adding/updating attribute
+        """
         lines = line.split()
 
         def update_it(loaded_obj, name_and_id):
@@ -156,10 +156,7 @@ class HBNBCommand(cmd.Cmd):
                 setattr(obj, lines[2], val_typecast)
                 storage.save()
 
-
         self._ExecuteCommand(line, update_it)
-
-
 
 
 if __name__ == '__main__':

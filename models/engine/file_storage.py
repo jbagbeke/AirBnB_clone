@@ -6,20 +6,14 @@ import json
 import os
 import importlib
 
+
 class FileStorage:
     """
     Does serialisation to and from a JSON file
     """
 
-    __file_path = None
+    __file_path = "file.json"
     __objects = {}
-
-    def __init__(self, _path='file.json'):
-        """
-        Initialises the private file_path attribute to a default path if none is given
-        """
-
-        FileStorage.__file_path = _path
 
     def all(self):
         """
@@ -56,10 +50,10 @@ class FileStorage:
                 module_name = "base_model"
             else:
                 module_name = cls_name.lower()
-        
+
             module_name = "models." + module_name
             imported_mod = importlib.import_module(module_name)
-        
+
             return getattr(imported_mod, cls_name)
         except (ImportError, AttributeError):
             return None
