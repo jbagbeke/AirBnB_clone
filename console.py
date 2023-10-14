@@ -117,6 +117,28 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** class doesn't exist **")
 
+    def do_all(self, line):
+        """
+        Prints all str representation of instances based or not on class name
+        """
+        lines = line.split()
+        loaded_obj = storage.all()
+        obj_list = []
+
+        if len(lines) == 0:
+            for key in loaded_obj.keys():
+                obj_list.append(str(loaded_obj[key]))
+            print(obj_list)
+        elif len(lines) > 0:
+            if self._CheckClass(lines[0]):
+                for key in loaded_obj.keys():
+                    class_name = key.split(".")
+                    if class_name[0] == lines[0]:
+                        obj_list.append(str(loaded_obj[key]))
+                print(obj_list)
+            else:
+                print("** class doesn't exist **")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
