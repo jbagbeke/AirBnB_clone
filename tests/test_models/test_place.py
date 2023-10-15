@@ -73,7 +73,7 @@ class TestUser(unittest.TestCase):
         message = "latitude should be of type float"
         self.assertIsInstance(self.place.latitude, float, message)
         self.assertEqual(self.place.latitude, 0.0)
-        
+
     def test_longitude_attribute(self):
         """Tests the that the Place class has the longitude attribute"""
         self.assertTrue(hasattr(self.place, "longitude"))
