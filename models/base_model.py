@@ -25,9 +25,7 @@ class BaseModel:
 
         if kwargs is not None and len(kwargs) > 0:
             for key, value in kwargs.items():
-                if key == "__class__":
-                    continue
-                elif key == "created_at" or key == "updated_at":
+                if key == "created_at" or key == "updated_at":
                     key_val = datetime.fromisoformat(value)
                     setattr(self, key, key_val)
                 else:
@@ -54,8 +52,8 @@ class BaseModel:
         Return: None
         """
 
-        storage.save()
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """

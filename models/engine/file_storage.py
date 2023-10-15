@@ -85,6 +85,7 @@ class FileStorage:
                     class_name = obj['__class__']
                     cls = self.get_class(class_name)
 
+                    del obj['__class__']
                     if cls is not None:
                         special_dict[key] = cls(**obj)
 
