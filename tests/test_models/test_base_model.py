@@ -22,7 +22,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test_uuid(self):
         """Tests the new instances created have unique ids"""
-        self.assertTrue(self.assertEqual(self.model1.id, self.model2.id))
+        self.assertTrue(self.assertNotEqual(self.model1.id, self.model2.id))
 
     def test_created_at_attribute(self):
         """Tests the that the model class has the created_at attribute"""
