@@ -19,13 +19,11 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(self.model1.id, str, "id should be of type str")
 
     def test_uuid(self):
-        """This function tests the new instances 
-        created have unique ids"""
+        """Tests the new instances created have unique ids"""
         self.assertFalse(self.assertEqual(self.model1.id, self.model2.id))
 
     def test_created_at_attribute(self):
-        """This function tests the that the model 
-        class has the created_at attribute"""
+        """Tests the that the model class has the created_at attribute"""
         self.assertTrue(hasattr(self.model1, "created_at"))
         message = "created_at should be of type str"
         self.assertIsInstance(self.model1.created_at, str, message)
@@ -33,8 +31,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(self.model1.created_at.isoformat(), model)
 
     def test_updated_at_attribute(self):
-        """This function tests the that the model 
-        class has the updated_at attribute"""
+        """Tests the that the model class has the updated_at attribute"""
         self.assertTrue(hasattr(self.model1, "updated_at"))
         message = "updated_at should be of type str"
         self.assertIsInstance(self.model1.updated_at, str, message)
@@ -54,14 +51,12 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(callable(self.model1.to_dict))
 
     def test_str_(self):
-        """ This is the test function to test the string 
-        representation of the BaseModel object"""
+        """ Test the string representation of the BaseModel object"""
         self.assertTrue(hasattr(self.model1, "__str__"))
         self.assertTrue(callable(self.model1.__str__))
 
     def tearDown(self):
-        """ This is the tear down function to 
-        destroy the model instance"""
+        """ Tear down function to destroy the model instance"""
         del self.model1
         del self.model2
 
