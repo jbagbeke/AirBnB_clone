@@ -156,10 +156,11 @@ class HBNBCommand(cmd.Cmd):
             else:
                 obj = loaded_obj[name_and_id]
                 try:
-                    val_typecast = type(getattr(obj, lines[2]))(lines[3])
-                    setattr(obj, lines[2], val_typecast)
+                    if type(obj.__dict__[lines[2]]) in (str, int, float):
+                        val_typecast = type(getattr(obj, lines[2]))(lines[3])
+                        setattr(obj, lines[2], val_typecast)
                 except AttributeError:
-                    obj.__dict__[lines[2]] = lines[3]
+                        obj.__dict__[lines[2]] = lines[3]
                 storage.save()
 
         self._ExecuteCommand(line, update_it)
