@@ -22,7 +22,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test_uuid(self):
         """Tests the new instances created have unique ids"""
-        self.assertFalse(self.assertEqual(self.model1.id, self.model2.id))
+        self.assertTrue(self.assertEqual(self.model1.id, self.model2.id))
 
     def test_created_at_attribute(self):
         """Tests the that the model class has the created_at attribute"""
@@ -38,7 +38,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save(self):
         """ Test for save function """
-        self.assertEqual(type(self.model1.updated_at), str)
+        self.assertEqual(type(self.model1.updated_at), datetime)
         self.assertTrue(hasattr(self.model1, "save"))
         self.assertTrue(callable(self.model1.save))
         assert self.model1 in storage.all().values()
