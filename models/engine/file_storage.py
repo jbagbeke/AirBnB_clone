@@ -89,3 +89,5 @@ class FileStorage:
                         special_dict[key] = cls(**obj)
 
                 FileStorage.__objects = special_dict
+        else:
+            return
