@@ -27,13 +27,13 @@ class TestBaseModel(unittest.TestCase):
     def test_created_at_attribute(self):
         """Tests the that the model class has the created_at attribute"""
         self.assertTrue(hasattr(self.model1, "created_at"))
-        self.assertIsInstance(self.model1.created_at, datetime, "created_at should be of type str")
+        self.assertIsInstance(self.model1.created_at, datetime.datetime, "created_at should be of type str")
         self.assertEqual(self.model1.created_at.isoformat(), self.model1.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f"))
 
     def test_updated_at_attribute(self):
         """Tests the that the model class has the updated_at attribute"""
         self.assertTrue(hasattr(self.model1, "updated_at"))
-        self.assertIsInstance(self.model1.updated_at, datetime, "updated_at should be of type str")
+        self.assertIsInstance(self.model1.updated_at, datetime.datetime, "updated_at should be of type str")
         self.assertEqual(self.model1.updated_at.isoformat(), self.model1.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f"))
 
     def test_save(self):
