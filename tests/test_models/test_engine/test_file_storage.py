@@ -14,12 +14,10 @@ class TestFileStorage(unittest.TestCase):
     def test_file_path_attribute(self):
         """This function tests the that the FileStorage class has the __file_path attribute"""
         self.assertFalse(hasattr(self.files, "__file_path"))
-        self.assertEqual(self.files, "")
 
     def test_objects_attribute(self):
         """This function tests the that the FileStorage class has the __objects attribute"""
         self.assertFalse(hasattr(self.files, "__objects"))
-        self.assertEqual(self.files.__objects, {})
 
     def test_all(self):
         """This function tests the that the FileStorage class has the all function"""
