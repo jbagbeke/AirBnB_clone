@@ -16,7 +16,7 @@ class TestBaseModel(unittest.TestCase):
     def test_id_attribute(self):
         """This function tests the that the model class has the id attribute"""
         self.assertTrue(hasattr(self.model1, "id"))
-        self.assertIsInstance(self.model1.id, str)
+        self.assertIsInstance(self.model1.id, str, "id should be of type str")
 
     def test_uuid(self):
         """This function tests the new instances created have unique ids"""
@@ -25,13 +25,13 @@ class TestBaseModel(unittest.TestCase):
     def test_created_at_attribute(self):
         """This function tests the that the model class has the created_at attribute"""
         self.assertTrue(hasattr(self.model1, "created_at"))
-        self.assertIsInstance(self.model1.created_at, datetime)
+        self.assertIsInstance(self.model1.created_at, datetime, "created_at should be of type datetime")
         self.assertEqual(self.model1.created_at.isoformat(), self.model1.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f"))
 
     def test_updated_at_attribute(self):
         """This function tests the that the model class has the updated_at attribute"""
         self.assertTrue(hasattr(self.model1, "updated_at"))
-        self.assertIsInstance(self.model1.updated_at, datetime)
+        self.assertIsInstance(self.model1.updated_at, datetime, "created_at should be of type datetime")
         self.assertEqual(self.model1.updated_at.isoformat(), self.model1.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f"))
 
     def test_save(self):
