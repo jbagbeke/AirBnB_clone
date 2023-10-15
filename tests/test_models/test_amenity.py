@@ -12,8 +12,7 @@ class TestUser(unittest.TestCase):
         self.amenity = Amenity()
 
     def test_name_attribute(self):
-        """This function tests the that the Amenity class 
-        has the name attribute"""
+        """tests the that the Amenity class has the name attribute"""
         self.assertTrue(hasattr(self.amenity, "name"))
         message = "name should be of type str"
         self.assertIsInstance(self.amenity.name, str, message)
