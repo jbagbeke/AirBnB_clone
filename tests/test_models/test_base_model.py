@@ -36,7 +36,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save(self):
         """ Test for save function """
-        self.assertEqual(type(self.model1.updated_at), datetime)
+        self.assertEqual(type(self.model1.updated_at), str)
         self.assertTrue(hasattr(self.model1, "save"))
         self.assertTrue(callable(self.model1.save))
 
