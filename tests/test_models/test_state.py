@@ -14,8 +14,7 @@ class TestUser(unittest.TestCase):
     def test_name_attribute(self):
         """Tests the that the State class has the name attribute"""
         self.assertTrue(hasattr(self.state, "name"))
-        message = "name should be of type str"
-        self.assertIsInstance(self.state.name, str, message)
+        self.assertIsInstance(self.state.name, str, "name should be of type str")
         self.assertEqual(self.state.name, "")
 
     def tearDown(self):
