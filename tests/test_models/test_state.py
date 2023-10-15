@@ -11,13 +11,14 @@ class TestUser(unittest.TestCase):
         """ The setUp function """
         self.state = State()
 
-    def tearDown(self):
-        pass
-
-    def test___init__(self):
-        """ Test for __init__ function """
+    def test_name_attribute(self):
+        """This function tests the that the State class has the name attribute"""
         self.assertTrue(hasattr(self.state, "name"))
-        self.assertEquals(type(self.state.name), str)
+        self.assertIsInstance(self.state.name, str)
+        self.assertEqual(self.state.name, "")
+
+    def tearDown(self):
+        del self.state
 
 
 if __name__ == "__main__":
