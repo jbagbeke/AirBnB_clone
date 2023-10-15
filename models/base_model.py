@@ -52,8 +52,8 @@ class BaseModel:
         Return: None
         """
 
-        self.updated_at = datetime.now()
         storage.save()
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         """
