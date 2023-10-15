@@ -11,13 +11,14 @@ class TestUser(unittest.TestCase):
         """ The setUp function """
         self.amenity = Amenity()
 
-    def tearDown(self):
-        pass
-
-    def test___init__(self):
-        """ Test for __init__ function """
+    def test_name_attribute(self):
+        """This function tests the that the Amenity class has the name attribute"""
         self.assertTrue(hasattr(self.amenity, "name"))
-        self.assertEquals(type(self.amenity.name), str)
+        self.assertIsInstance(self.amenity.name, str)
+        self.assertEqual(self.amenity.name, "")
+
+    def tearDown(self):
+        del self.amenity
 
 
 if __name__ == "__main__":

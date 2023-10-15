@@ -16,6 +16,7 @@ class TestBaseModel(unittest.TestCase):
     def test_id_attribute(self):
         """This function tests the that the model class has the id attribute"""
         self.assertTrue(hasattr(self.model1, "id"))
+        self.assertIsInstance(self.model1.id, str)
 
     def test_uuid(self):
         """This function tests the new instances created have unique ids"""
