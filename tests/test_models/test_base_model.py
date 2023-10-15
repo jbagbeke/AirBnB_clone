@@ -3,6 +3,7 @@
 import unittest
 import datetime
 from models.base_model import BaseModel
+from models import storage
 
 
 class TestBaseModel(unittest.TestCase):
@@ -12,6 +13,7 @@ class TestBaseModel(unittest.TestCase):
         """ The setUp function """
         self.model1 = BaseModel()
         self.model2 = BaseModel()
+        self.model3 = BaseModel()
 
     def test_id_attribute(self):
         """This function tests the that the model class has the id attribute"""
@@ -25,13 +27,13 @@ class TestBaseModel(unittest.TestCase):
     def test_created_at_attribute(self):
         """Tests the that the model class has the created_at attribute"""
         self.assertTrue(hasattr(self.model1, "created_at"))
-        self.assertIsInstance(self.model1.created_at, str, "created_at should be of type str")
+        self.assertIsInstance(self.model1.created_at, datetime, "created_at should be of type str")
         self.assertEqual(self.model1.created_at.isoformat(), self.model1.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f"))
 
     def test_updated_at_attribute(self):
         """Tests the that the model class has the updated_at attribute"""
         self.assertTrue(hasattr(self.model1, "updated_at"))
-        self.assertIsInstance(self.model1.updated_at, str, "updated_at should be of type str")
+        self.assertIsInstance(self.model1.updated_at, datetime, "updated_at should be of type str")
         self.assertEqual(self.model1.updated_at.isoformat(), self.model1.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f"))
 
     def test_save(self):
@@ -39,6 +41,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(self.model1.updated_at), str)
         self.assertTrue(hasattr(self.model1, "save"))
         self.assertTrue(callable(self.model1.save))
+        assert self.model1 in storage.all().values()
 
     def test_to_dict(self):
         """ This function tests the to_dict function"""
