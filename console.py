@@ -59,6 +59,14 @@ class HBNBCommand(cmd.Cmd):
 
                 if new_match is not None:
                     line = line + " " + str(new_match.group(1))
+            elif matches.group(2) == "update":
+                patt_ern = r'\("?(.*?)"?,\s"?(.*?)"?,\s"?(.*?)"?\)'
+                new_match = re.search(patt_ern, line_copy)
+
+                if new_match is not None:
+                    line = line + " " + str(new_match.group(1)) + " "
+                    line = line + str(new_match.group(2)) + " "
+                    line  = line + str(new_match.group(3))
 
         return super().onecmd(line)
 
