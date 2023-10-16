@@ -12,30 +12,30 @@ class TestFileStorage(unittest.TestCase):
         self.files = FileStorage()
 
     def test_file_path_attribute(self):
-        """This function tests the that the FileStorage class has the __file_path attribute"""
+        """Tests that the FileStorage class has the __file_path attribute"""
         self.assertFalse(hasattr(self.files, "__file_path"))
 
     def test_objects_attribute(self):
-        """This function tests the that the FileStorage class has the __objects attribute"""
+        """Tests that the FileStorage class has the __objects attribute"""
         self.assertFalse(hasattr(self.files, "__objects"))
 
     def test_all(self):
-        """This function tests the that the FileStorage class has the all function"""
+        """Tests that the FileStorage class has the all function"""
         self.assertTrue(hasattr(self.files, "all"))
         self.assertTrue(callable(self.files.all))
 
     def test_new(self):
-        """This function tests the that the FileStorage class has the new function"""
+        """Tests that the FileStorage class has the new function"""
         self.assertTrue(hasattr(self.files, "new"))
         self.assertTrue(callable(self.files.new))
 
     def test_save(self):
-        """This function tests the that the FileStorage class has the save function"""
+        """Tests that the FileStorage class has the save function"""
         self.assertTrue(hasattr(self.files, "save"))
         self.assertTrue(callable(self.files.save))
 
     def test_reload(self):
-        """This function tests the that the FileStorage class has the reload function"""
+        """Tests that the FileStorage class has the reload function"""
         self.assertTrue(hasattr(self.files, "reload"))
         self.assertTrue(callable(self.files.reload))
 
