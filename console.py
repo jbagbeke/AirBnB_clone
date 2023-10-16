@@ -47,10 +47,19 @@ class HBNBCommand(cmd.Cmd):
         """
         Preprocess the input line before passing it to the command processor
         """
+        line_copy = line
         pattern = r'([BURPACS]\w+)\.(\w+)()'
         matches = re.search(pattern, line)
         if matches is not None:
             line = str(matches.group(2)) + " " + str(matches.group(1))
+
+            if matches.group(2) in ("show", "destroy"):
+                patt_ern = r'\("?(.*?)"?\)'
+                new_match = re.search(patt_ern, line_copy)
+
+                if new_match is not None:
+                    line = line + " " + str(new_match.group(1))
+
         return super().onecmd(line)
 
     def do_EOF(self, line):
