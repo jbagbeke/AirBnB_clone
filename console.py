@@ -3,6 +3,7 @@
 Contains the entry point of the command interpreter
 """
 import cmd
+import re
 import sys
 from models import storage
 from models.base_model import BaseModel
@@ -41,6 +42,16 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ Executes no command when no input is entered """
         pass
+
+    def onecmd(self, line):
+        """
+        Preprocess the input line before passing it to the command processor
+        """
+        pattern = r'([BURPACS]\w+)\.(\w+)()'
+        matches = re.search(pattern, line)
+        if matches is not None:
+            line = str(matches.group(2)) + " " + str(matches.group(1))
+        return super().onecmd(line)
 
     def do_EOF(self, line):
         """Handles EOF (Ctrl+D or Ctrl+Z) by exiting the console"""
@@ -106,6 +117,22 @@ class HBNBCommand(cmd.Cmd):
             print(loaded_obj[name_and_id])
 
         self._ExecuteCommand(line, show_it)
+
+    def do_count(self, line):
+        """ Retrieves the number of instances of a class """
+
+        lines = line.split()
+        loaded_obj = storage.all()
+        instance = 0
+
+        if self._CheckClass(lines[0]):
+            for key in loaded_obj.keys():
+                name = key.split(".")
+                if lines[0] == name[0]:
+                    instance += 1
+            print(instance)
+        else:
+            print("** class doesn't exist **")
 
     def do_destroy(self, line):
         """Prints str representation of instance based on class name and id"""
