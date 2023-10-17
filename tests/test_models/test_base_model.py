@@ -78,6 +78,14 @@ class TestBaseModel(unittest.TestCase):
         """ Test the string representation of the BaseModel object"""
         self.assertTrue(hasattr(self.model1, "__str__"))
         self.assertTrue(callable(self.model1.__str__))
+        self.model1.name = "My First Model"
+        self.model1.my_number = 89
+        u = self.model1.id
+        cr = self.model1.created_at
+        up = self.model1.updated_at
+        ex_rep = "[BaseModel] ({}) {'name': 'My First Model', 'updated_at':{}, 'created_at':{}, 'id':{}}".format(u, up, cr, u)
+        actual_rep = self.model1.__repr__()
+        self.assertEqual(ex_rep, actual_rep)
 
     def tearDown(self):
         """ Tear down function to destroy the model instance"""
