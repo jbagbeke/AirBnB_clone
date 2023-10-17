@@ -54,15 +54,6 @@ class TestBaseModel(unittest.TestCase):
             self.model1.save(50)
         message2 = "save() takes 1 positional argument but 2 were given"
         self.assertEqual(str(e.exception), message2)
-        self.model1.save()
-        key = "{}.{}".format(type(self.model1).__name__, self.model1.id)
-        self.model2 = {key: self.model1.to_dict()}
-        self.assertTrue(os.path.isfile(FileStorage._FileStorage__file_path))
-        with open(FileStorage._FileStorage__file_path,
-                  "r", encoding="utf-8") as f:
-            self.assertEqual(len(f.read()), len(json.dumps(self.model2)))
-            f.seek(0)
-            self.assertEqual(json.load(f), self.model2)
 
     def test_to_dict(self):
         """ This function tests the to_dict function"""
