@@ -51,12 +51,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(callable(self.model1.save))
         assert self.model1 in storage.all().values()
         with self.assertRaises(TypeError) as e:
-            self.model1.save()
-        message = "save() missing 1 required positional argument: self"
-        self.assertEqual(str(e.exception), message)
-        with self.assertRaises(TypeError) as e:
-            self.model1.save(self, 50)
-        message2 = "save() contains excess positional arguments"
+            self.model1.save(50)
+        message2 = "save() takes 1 positional argument but 2 were given"
         self.assertEqual(str(e.exception), message2)
         self.model1.save()
         key = "{}.{}".format(type(self.model1).__name__, self.model1.id)
@@ -75,12 +71,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(callable(self.model1.to_dict))
         with self.assertRaises(TypeError) as e:
             self.model1.to_dict(self, 45)
-        message = "to_dict() contains excess positional arguments"
+        message = "to_dict() takes 1 positional argument but 3 were given"
         self.assertEqual(str(e.exception), message)
-        with self.assertRaises(TypeError) as e:
-            self.model1.to_dict()
-        message2 = "to_dict() requires 1 positional argument: self"
-        self.assertEqual(str(e.exception), message2)
         self.model1.name = "Laura"
         self.model1.age = 23
         self.model2 = self.model1.to_dict()
