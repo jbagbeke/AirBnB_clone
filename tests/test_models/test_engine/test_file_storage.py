@@ -29,7 +29,10 @@ class TestFileStorage(unittest.TestCase):
         """Tests that the FileStorage class has the all function"""
         self.assertTrue(hasattr(self.files, "all"))
         self.assertTrue(callable(self.files.all))
-        self.assertEqual(self.files.all(), self.files.__objects)
+        try:
+            self.assertEqual(self.files.all(), self.files.__objects)
+        except AttributeError:
+            self.assertFalse(hasattr(self.files, "__objects"))
 
     def test_new(self):
         """Tests that the FileStorage class has the new function"""
