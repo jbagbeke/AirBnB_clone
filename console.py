@@ -43,6 +43,16 @@ class HBNBCommand(cmd.Cmd):
         """ Executes no command when no input is entered """
         pass
 
+    def _UpdateDict(self, line, diction):
+        """ Updates several attributes passed in a dictionary """
+
+        for key, value in diction.items():
+            line_cpy = line[7:]
+            line_cpy = line_cpy + " " + str(key) + " " + str(value)
+            self.do_update(line_cpy)
+
+        return
+
     def onecmd(self, line):
         """
         Preprocess the input line before passing it to the command processor
@@ -60,13 +70,19 @@ class HBNBCommand(cmd.Cmd):
                 if new_match is not None:
                     line = line + " " + str(new_match.group(1))
             elif matches.group(2) == "update":
-                patt_ern = r'\("?(.*?)"?,\s"?(.*?)"?,\s"?(.*?)"?\)'
-                new_match = re.search(patt_ern, line_copy)
+                match_one = re.search(r'\("?(.*?)"?,\s(\{.*?)\)', line_copy)
 
-                if new_match is not None:
-                    line = line + " " + str(new_match.group(1)) + " "
-                    line = line + str(new_match.group(2)) + " "
-                    line  = line + str(new_match.group(3))
+                pat_two = r'\("?(.*?)"?,\s"?(.*?)"?,\s"?(.*?)"?\)'
+                match_two = re.search(pat_two, line_copy)
+
+                if match_one:
+                    line = line + " " + str(match_one.group(1))
+                    self._UpdateDict(line, eval(match_one.group(2)))
+                    return
+                elif match_two:
+                    line = line + " " + str(match_two.group(1)) + " "
+                    line = line + str(match_two.group(2)) + " "
+                    line = line + str(match_two.group(3))
 
         return super().onecmd(line)
 
