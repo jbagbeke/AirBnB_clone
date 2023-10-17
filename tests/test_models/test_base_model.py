@@ -79,9 +79,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(hasattr(self.model1, "__str__"))
         self.assertTrue(callable(self.model1.__str__))
         u = self.model1.id
-        cr = self.model1.created_at
-        up = self.model1.updated_at
-        ex_rep = "[BaseModel] ({}) {'updated_at':{}, 'created_at':{}, 'id':{}}".format(u, up, cr, u)
+        ex_rep = "[BaseModel] ({}) {}".format(u, self.model1.to_dict)
         actual_rep = self.model1.__str__()
         self.assertEqual(ex_rep, actual_rep)
 
