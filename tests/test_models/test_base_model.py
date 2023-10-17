@@ -82,7 +82,7 @@ class TestBaseModel(unittest.TestCase):
         cr = self.model1.created_at
         up = self.model1.updated_at
         ex_rep = "[BaseModel] ({}) {'updated_at':{}, 'created_at':{}, 'id':{}}".format(u, up, cr, u)
-        actual_rep = self.model1.__repr__()
+        actual_rep = self.model1.__str__()
         self.assertEqual(ex_rep, actual_rep)
 
     def tearDown(self):
