@@ -4,6 +4,9 @@ import unittest
 import datetime
 from models.base_model import BaseModel
 from models import storage
+from models.engine.file_storage import FileStorage
+import json
+import os
 
 
 class TestBaseModel(unittest.TestCase):
@@ -47,12 +50,52 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(hasattr(self.model1, "save"))
         self.assertTrue(callable(self.model1.save))
         assert self.model1 in storage.all().values()
+        self.model1.resetStorage()
+        with self.assertRaises(TypeError) as e:
+            self.model1.save()
+        message = "save() missing 1 required positional argument: self"
+        self.assertEqual(str(e.exception), message)
+        self.model1.resetStorage()
+        with self.assertRaises(TypeError) as e:
+            self.model1.save(self, 50)
+        message2 = "save() contains excess positional arguments"
+        self.model1.resetStorage()
+        self.assertEqual(str(e.exception), message2)
+        self.model1.resetStorage()
+        self.model1.save()
+        key = "{}.{}".format(type(self.model1).__name__, self.model1.id)
+        self.model2 = {key: self.model1.to_dict()}
+        self.assertTrue(os.path.isfile(FileStorage._FileStorage__file_path))
+        with open(FileStorage._FileStorage__file_path,
+                  "r", encoding="utf-8") as f:
+            self.assertEqual(len(f.read()), len(json.dumps(self.model2)))
+            f.seek(0)
+            self.assertEqual(json.load(f), self.model2)
 
     def test_to_dict(self):
         """ This function tests the to_dict function"""
         self.assertEqual(type(self.model1.to_dict()), dict)
         self.assertTrue(hasattr(self.model1, "to_dict"))
         self.assertTrue(callable(self.model1.to_dict))
+        self.model1.resetStorage()
+        with self.assertRaises(TypeError) as e:
+            self.model1.to_dict(self, 45)
+        message = "to_dict() contains excess positional arguments"
+        self.assertEqual(str(e.exception), message)
+        self.model1.resetStorage()
+        with self.assertRaises(TypeError) as e:
+            self.model1.to_dict()
+        message2 = "to_dict() requires 1 positional argument: self"
+        self.assertEqual(str(e.exception), message2)
+        self.model1.name = "Laura"
+        self.model1.age = 23
+        self.model2 = self.model1.to_dict()
+        self.assertEqual(self.model2["id"], self.model1.id)
+        self.assertEqual(self.model2["__class__"], type(self.model1).__name__)
+        self.assertEqual(self.model2["created_at"], self.model1.created_at.isoformat())
+        self.assertEqual(self.model2["updated_at"], self.model1.updated_at.isoformat())
+        self.assertEqual(self.model2["name"], self.model1.name)
+        self.assertEqual(self.model2["age"], self.model1.age)
 
     def test_str_(self):
         """ Test the string representation of the BaseModel object"""
