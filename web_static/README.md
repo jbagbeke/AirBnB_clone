@@ -1,1 +1,1 @@
-Web pages for AirBnB_clone
+Web-Static Development for AirBnB project
